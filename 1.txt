@@ -1,0 +1,72 @@
+//login module
+private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        con=Connect.ConnectDB();
+        String sql= "select * from Users where Username= '" + userNameField.getText() + "' and User_Password ='" + passwordField.getText() + "'";
+      try
+      {
+          pst=con.prepareStatement(sql);
+          rs= pst.executeQuery();
+          //(""==usernamField.getText())
+          if("".equals(userNameField.getText()) &amp;&amp; "".equals(passwordField.getText())){
+              JOptionPane.showMessageDialog(null,"Please Enter Username and Password!");
+          }
+         else if (rs.next()){
+             this.hide();
+             MainMenu menu=new MainMenu();
+             menu.setVisible(true);
+          }
+          else{
+              
+            JOptionPane.showMessageDialog(null, "Login Failed..Try again !","Access denied",JOptionPane.ERROR_MESSAGE);
+            userNameField.setText("");
+            passwordField.setText("");
+            userNameField.requestFocus();
+          }
+      }
+      catch(SQLException | HeadlessException e)
+      {
+         JOptionPane.showMessageDialog(null, e);    
+      }
+      
+    }                                          
+ 
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }                                            
+ 
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {                                        
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            
+        con=Connect.ConnectDB();
+        String sql= "select * from Users where Username= '" + userNameField.getText() + "' and User_Password ='" + passwordField.getText() + "'";
+      try
+      {
+          pst=con.prepareStatement(sql);
+          rs= pst.executeQuery();
+          if("".equals(userNameField.getText()) &amp;&amp; "".equals(passwordField.getText())){
+              JOptionPane.showMessageDialog(null,"Please Enter Username and Password!");
+          }
+         else if (rs.next()){
+             this.hide();
+             MainMenu menu=new MainMenu();
+             menu.setVisible(true);
+          }
+          else{
+              
+            JOptionPane.showMessageDialog(null, "Login Failed..Try again !","Access denied",JOptionPane.ERROR_MESSAGE);
+            userNameField.setText("");
+            passwordField.setText("");
+            userNameField.requestFocus();
+          }
+      }
+      catch(SQLException | HeadlessException e)
+      {
+         JOptionPane.showMessageDialog(null, e);    
+      }
+            
+        }
+    }                                        
+ 
+    private void userNameFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        // TODO add your handling code here:
+    }
